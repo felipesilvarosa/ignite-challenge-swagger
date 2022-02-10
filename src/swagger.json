@@ -11,7 +11,7 @@
   "paths": {
     "/users":{
       "post":{
-        "tags": ["User"],
+        "tags": ["Users"],
         "summary": "Create a new user",
         "description": "Create a new user",
         "requestBody": {
@@ -90,9 +90,64 @@
                 }
               }
             }
+          },
+          "400":{
+            "description": "`User is not a admin."
           }
         }
       }
-    }
+    },
+    "/users/:user_id":{
+      "get":{
+        "tags": ["Users"],
+        "summary": "Get a user by id",
+        "description": "Get a user by id",
+        "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "description": "User id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+        "responses":{
+        "200":{
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                    "id":{
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "updated_at": {
+                      "type": "Date"
+                    }
+                  }
+              }
+            }
+          }
+      },
+        "404":{
+          "description": "`User is not found."
+      }
+    }}
   }
+}
 }

@@ -1,0 +1,98 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Atlas",
+    "description": "Documentação da Api do Desafio 01 - Introdução ao SOLID ",  
+    "version": "1.0.0",
+    "contact": {
+      "email": "felipesrosa@gmail.com"
+    }
+  },
+  "paths": {
+    "/users":{
+      "post":{
+        "tags": ["User"],
+        "summary": "Create a new user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json":{
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email":{
+                    "type": "string"
+                  }
+                },
+                "example":{
+                  "name": "Jonatão",
+                  "description": "jon@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "201":{
+            "description": "Created"
+          },
+          "400":{
+            "description": "`email already in use. Try with another email."
+          }
+        }
+      },
+      "get":{
+        "tags": ["Users"],
+        "summary": "Get all users if admin",
+        "description": "Get all users if user requesting is admin",
+        "parameters":
+          [
+            {"in": "header",
+            "name": "user_id",
+            "description": "User id",
+            "schema": {
+              "type": "string"
+            }}
+          ],
+        "responses":{
+          "200":{
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id":{
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      },
+                      "updated_at": {
+                        "type": "Date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
